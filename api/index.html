@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <title>API接口测试</title>
+</head>
+<body>
+    <div class="content">
+        <!-- <h3 class="title">登录接口</h3> -->
+    <div class="wrap">
+        <div class="left_wrap">
+            <h3>IPCC在线接口API</h3>
+            <h4>通用API</h4>
+            <a class="name" href="#LoginIn">登录</a>
+            <a class="name" href="#autoLogin">自动登录</a>
+            <a class="name" href="#SignOut">坐席登出</a>
+            <a class="name" href="#resetPassword">修改密码</a>
+            <a class="name" href="#GroupList">获取坐席组</a>
+            <a class="name" href="#AllGroupList">获取所有坐席</a>
+            <h4>在线服务API</h4>
+            <a class="name" href="#LineState">在线坐席上下线</a>
+            <a class="name" href="#GetRooms">获取当前在线坐席聊天室列表</a>
+            <a class="name" href="#GetVoiceRoomsHistory">获取语音服务历史通话列表</a>
+            <a class="name" href="#GetAgent">获取当前在线的在线坐席</a>
+            <a class="name" href="#GetUserMsgByRid">获取坐席侧会话里的消息</a>
+            <h4>语音服务API</h4>
+            <a class="name" href="#signIn">语音坐席上线</a>
+            <a class="name" href="#CtiSignOut">语音坐席下线</a>
+            <a class="name" href="#ChangeStatus">切换状态</a>
+            <a class="name" href="#Callout">主动外呼</a>
+            <a class="name" href="#HandUp">挂断电话</a>
+            <a class="name" href="#Evaluate">评分</a>
+            <a class="name" href="#MuteVoice">静音</a>
+            <a class="name" href="#UnMuteVoice">取消静音</a>
+            <a class="name" href="#HoldVoice">保持</a>
+            <a class="name" href="#UnHoldVoice">取消保持</a>
+            <a class="name" href="#MonitorHandle">监控相关处理（监听、密语、强插、强拆)</a>
+            <a class="name" href="#ThreeWay">三方</a>  
+            <a class="name" href="#UnThreeWay">取消三方</a>  
+            <a class="name" href="#GetCtiAgentRole">获取坐席的监控权限</a>  
+            <a class="name" href="#GetAgentGroupList">获取坐席组列表</a>  
+            <a class="name" href="#GetAgentOfQueue">根据队列号查询队列成员</a>  
+            <a class="name" href="#GetAgentsOfAgentGroup">获取某个坐席组的成员</a>  
+            <a class="name" href="#GetAgentMonitorInfo">获取坐席的监控状态</a>  
+            <a class="name" href="#GetQueueStatis">获取队列统计信息</a>  
+            <a class="name" href="#GetCtiOnlineAgent">获取在线的坐席</a>  
+            <a class="name" href="#GetIvrProfileList">获取IVR Profile列表</a>  
+            <a class="name" href="#GetIvrList">获取IVR列表</a>  
+            <a class="name" href="#ConsultHandle">询问</a>  
+            <a class="name" href="#ConsultCancel">取消询问</a>  
+            <a class="name" href="#ConsultTransfer">询问转</a>  
+            <a class="name" href="#BlindTransfer">盲转</a>  
+            <a class="name" href="#CtiAgentStatus">获取坐席状态</a>  
+            <a class="name" href="#InternalCal">坐席互拨</a>  
+            <a class="name" href="#ResetPassword">重置密码</a>  
+            <a class="name" href="#QueueTransfer">队列转交</a> 
+            <a class="name" href="#AgentTransfer">坐席转交</a>  
+            <a class="name" href="#GetCustomerQueue">根据队列获取客户排队情况</a>  
+            <a class="name" href="#GetDetailCallInfo">获取呼叫详情</a>  
+            <h4>事件</h4>
+            <a class="name" href="#CtiEvent">事件监听</a> 
+            <!-- <a class="name" href="#CtiEventSignin">语音坐席上线</a> 
+            <a class="name" href="#CtiEventSignOut">语音坐席下线</a> 
+            <a class="name" href="#CtiEventAgentStatus">状态切换</a> 
+            <a class="name" href="#CtiEventAddCall">普通来电</a> 
+            <a class="name" href="#CtiEventCallOut">主动外呼</a> 
+            <a class="name" href="#CtiEventCallInner">坐席互拨</a> 
+            <a class="name" href="#CtiEventCallLoop">回环测试</a> 
+            <a class="name" href="#CtiEventCallTransfer">盲转</a> 
+            <a class="name" href="#CtiEventCallAsk">询问，询问取消， 询问转</a> 
+            <a class="name" href="#CtiEventCallThtee">三方， 取消三方</a> 
+            <a class="name" href="#CtiEventCallListener">监听， 密语， 强插， 强拆</a>  -->
+            <a class="name" href="javascript:;"></a>    
+  
+        </div>
+        <div class="right_wrap">
+            <div class="host">
+                <div class="host_info">
+                    <label>访问的主机地址:</label>
+                    <input placeholder="http://ip:prot" type="text" class="protocol" id='protocol'>
+                    <span class="tips"></span>
+                </div>
+                <div class="status_info">
+                   <div class="item">
+                       <label>登录状态：</label><span id='signState'></span>
+                   </div>
+                    <div class="item">
+                        <label>语音坐席状态：</label><span id='extensionState'></span>
+                    </div>
+                    <div class="item">
+                            <label>在线坐席状态：</label><span id='lineState'></span>
+                    </div>
+                    <!-- <div class="item">
+                        <label>心跳状态：</label><span id='heartState'></span>
+                </div> -->
+                </div>
+            </div>  
+            <!-- 登录 -->
+            <div class="box" id='LoginIn'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/sysUserSignIn</span>
+                        </div>
+                        <div class="row">
+                            <label for="account">用户名：</label>
+                            <input id="account" type="text" class="account" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="password">密码：</label>
+                            <input id="password" type="password" class="password" value=''>
+                        </div>
+                        <div class="row captcha_wrap">
+                            <label for="captcha">验证码：</label> <span class="getCap"> 获取验证码</span>
+                            <input id="captcha" type="text" class="captcha">
+                            <img id='imgCode' alt='' />
+                        </div>
+                        <div class="row">
+                            <div id="LoginInBtn" class="btn">坐席登录</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeLogin">返回结果：</label>
+                        <code class='code' id='codeLogin'></code>
+                    </div>
+            </div>
+            <!-- 自动登录 autoLogin -->
+            <div class="box" id='autoLogin'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/authByToken</span>
+                        </div>
+                        <div class="row">
+                            <div style='margin-top:50px;' id="autoLoginBtn" class="btn">自动登录</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeAutoLogin">返回结果：</label>
+                        <code class='code' id='codeAutoLogin'></code>
+                    </div>
+            </div>
+            <!-- 坐席登出 -->
+            <div class="box" id='SignOut'>
+                <div class="lp">
+                    <div class="row mb20">
+                        <label>API:</label>
+                        <span>/api/loginOut</span>
+                    </div>
+                    <div class="row">
+                        <div style='margin-top: 50px;' id="signOut" class="btn">坐席登出</div>
+                    </div>
+                </div>
+                <div class="rp">
+                    <label for="codeLogin">返回结果：</label>
+                    <code class='code' id='codesignOut'></code>
+                </div>
+            </div>
+            <!-- 修改密码 -->
+            <div class="box" id= 'resetPassword'>
+                <div class="lp">
+                    <div class="row mb20">
+                        <label>API:</label>
+                        <span>api/savePassword</span>
+                    </div>
+                    <div class="row">
+                        <label for="passAgentNum">坐席工号：</label>
+                        <input id="passAgentNum" type="text" class="agentNum" value=''>
+                    </div>
+                    <div class="row">
+                        <label for="oldPwd">旧密码：</label>
+                        <input id="oldPwd" type="password" class="oldPwd" value=''>
+                    </div>
+                    <div class="row">
+                        <label for="newPwd">新密码：</label>
+                        <input id="newPwd" type="password" class="newPwd" value="">
+                    </div>
+        
+                    <div class="row">
+                        <div id="savePassword" class="btn">修改密码</div>
+                    </div>
+                </div>
+                <div class="rp">
+                    <label for="codePassword">返回结果：</label>
+                    <code class='code' id='codePassword'></code>
+                </div>
+            </div>
+            <!-- 获取坐席组 -->
+            <div class="box" id='GroupList'>
+                <div class="lp">
+                    <div class="row mb20">
+                        <label>API:</label>
+                        <span>/api/getGroupList</span>
+                    </div>
+                    <div class="row">
+                        <div style='margin-top: 50px;' id="getGroupListBtn" class="btn">获取坐席组</div>
+                    </div>
+                </div>
+                <div class="rp">
+                    <label for="getGroupList">返回结果：</label>
+                    <code class='code' id='getGroupList'></code>
+                </div>
+            </div>
+            <!-- 获取所有坐席 -->
+            <div class="box" id='AllGroupList'>
+                <div class="lp">
+                    <div class="row mb20">
+                        <label>API:</label>
+                        <span>/api/getUserListByPage</span>
+                    </div>
+
+                    <div class="row">
+                        <label for="pageCount">显示个数：</label>
+                        <input id="pageCount" type="text" class="pageCount" value="" >
+                    </div>
+                    <div class="row">
+                        <label for="pageNum">显示页码：</label>
+                        <input id="pageNum" type="text" class="pageNum" value="" >
+                    </div>
+
+                    <div class="row">
+                        <div style='margin-top: 50px;' id="getAllGroupListBtn" class="btn">获取坐席组</div>
+                    </div>
+                </div>
+                <div class="rp">
+                    <label for="getAllGroupList">返回结果：</label>
+                    <code class='code' id='getAllGroupList'></code>
+                </div>
+            </div>
+            <!-- 在线坐席上下线 -->
+            <div class="box" id='LineState'>
+                <div class="lp">
+                    <div class="row mb20">
+                        <label>API:</label>
+                        <span>/api/setUserState</span>
+                    </div>
+                    <div class="row">
+                        <label for="onLineState">在线状态：（1：上线，2：下线）</label>
+                        <input id="onLineState" type="text" class="lineState" value="" >
+                    </div>
+                    <div class="row">
+                        <div style='margin-top: 50px;' id="lineStateBtn" class="btn">坐席上下线</div>
+                    </div>
+                </div>
+                <div class="rp">
+                    <label for="getLineState">返回结果：</label>
+                    <code class='code' id='getLineState'></code>
+                </div>
+            </div>
+            <!-- 获取当前在线坐席聊天室列表 -->
+            <div class="box" id='GetRooms'>
+                <div class="lp">
+                    <div class="row mb20">
+                        <label>API:</label>
+                        <span>/api/setUserState</span>
+                    </div>
+                    <div class="row">
+                        <div style='margin-top: 50px;' id="getRoomsBtn" class="btn">在线坐席聊天室列表</div>
+                    </div>
+                </div>
+                <div class="rp">
+                    <label for="getRooms">返回结果：</label>
+                    <code class='code' id='getRooms'></code>
+                </div>
+            </div>
+            <!--获取当前语音服务通话列表  暂无接口-->
+            <div class="box" id='GetVoiceRooms'>
+                <div class="lp">
+                    <div class="row mb20">
+                        <label>API:</label>
+                        <span>/api/getVoiceRooms</span>
+                    </div>
+                    <div class="row">
+                        <div style='margin-top: 50px;' id="getVoiceRoomsBtn" class="btn">语音服务通话列表</div>
+                    </div>
+                </div>
+                <div class="rp">
+                    <label for="getVoiceRooms">返回结果：</label>
+                    <code class='code' id='getVoiceRooms'></code>
+                </div>
+            </div>
+            <!--获取语音服务历史通话列表 -->
+            <div class="box" id='GetVoiceRoomsHistory'>
+                <div class="lp">
+                    <div class="row mb20">
+                        <label>API:</label>
+                        <span>/api/getVoiceRoomsHistory</span>
+                    </div>
+                    <div class="row">
+                        <label for="custIdText">系统分配给客户的识别Id：</label>
+                        <input id="custIdText" type="text" class="custId" value="" >
+                    </div>
+                    <div class="row">
+                        <div style='margin-top: 50px;' id="getVoiceRoomsHistoryBtn" class="btn">语音服务历史通话列表</div>
+                    </div>
+                </div>
+                <div class="rp">
+                    <label for="getVoiceRoomsHistory">返回结果：</label>
+                    <code class='code' id='getVoiceRoomsHistory'></code>
+                </div>
+            </div>
+            <!--获取当前在线的在线坐席  -->
+            <div class="box" id='GetAgent'>
+                <div class="lp">
+                    <div class="row mb20">
+                        <label>API:</label>
+                        <span>/api/getAgent</span>
+                    </div>
+                    <div class="row">
+                        <label for="queryText">搜索内容：</label>
+                        <input id="queryText" type="text" class="queryText" value="" >
+                    </div>
+                    <div class="row">
+                        <label for="queryType">查询类型：（在线=inline，不在线=2）</label>
+                        <input id="queryType" type="text" class="queryType" value="" >
+                    </div>
+                    <div class="row">
+                        <div style='margin-top: 50px;' id="getAgentBtn" class="btn">在线的在线坐席</div>
+                    </div>
+                </div>
+                <div class="rp">
+                    <label for="getAgentCode">返回结果：</label>
+                    <code class='code' id='getAgentCode'></code>
+                </div>
+            </div>
+            <!--获取坐席侧会话里的消息 GetUserMsgByRid-->
+            <div class="box" id='GetUserMsgByRid'>
+                <div class="lp">
+                    <div class="row mb20">
+                        <label>API:</label>
+                        <span>/api/getUserMsgByRid</span>
+                    </div>
+                    <div class="row">
+                        <label for="Rid">房间Id：</label>
+                        <input id="Rid" type="text" class="Rid" value="" >
+                    </div>
+                    <div class="row">
+                        <label for="sessionId">会话Id：</label>
+                        <input id="sessionId" type="text" class="sessionId" value="" >
+                    </div>
+                    <div class="row">
+                        <label for="last">时间：（分页用，首次传入空值，后续传入上次返回结果的最后一条数据的时间）</label>
+                        <input id="last" type="text" class="last" value="" >
+                    </div>
+                    <div class="row">
+                        <div style='margin-top: 50px;' id="getUserMsgByRidBtn" class="btn">坐席侧会话消息</div>
+                    </div>
+                </div>
+                <div class="rp">
+                    <label for="getUserMsgByRid">返回结果：</label>
+                    <code class='code' id='getUserMsgByRid'></code>
+                </div>
+            </div>
+             <!-- 语音坐席上线 -->
+             <div class="box">
+                    <a name='signIn'></a>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label for="account">API:</label>
+                            <span>/api/ctiSignIn</span>
+                        </div>
+                        <div class="row">
+                            <label for="ctiAgentNum">坐席工号：</label>
+                            <input id="ctiAgentNum" type="text" class="agentNum" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="exten">分机号：</label>
+                            <input id="exten" type="text" class="exten" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="initStatus">状态码：(-2未知，-1离线，0空闲，1振铃，2通话，3保持，
+                            4后处理，5被占用，6忙碌，7离开，8预览外呼中，9监控，10呼出中)</label>
+                            <input id="initStatus" type="text" class="initStatus" value="">
+                        </div>
+            
+                        <div class="row">
+                            <div id="ctiSignIn" class="btn">语音坐席上线</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeCtiSignIn">返回结果：</label>
+                        <code class='code' id='codeCtiSignIn'></code>
+                    </div>
+            </div>
+            <!-- 语音坐席下线 CtiSignOut-->
+            <div class="box" id='CtiSignOut'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/ctiSignOut</span>
+                        </div>
+                        <div class="row">
+                            <label for="ctiOutAgentNum">坐席工号：</label>
+                            <input id="ctiOutAgentNum" type="text" class="ctiOutAgentNum" value=''>
+                        </div>
+                        <div class="row">
+                            <div style='margin-top: 50px;' id="ctiSignOut" class="btn">语音坐席下线</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeCtiSignOut">返回结果：</label>
+                        <code class='code' id='codeCtiSignOut'></code>
+                    </div>
+            </div>
+            <!--状态切换 ChangeStatus-->
+            <div class="box" id='ChangeStatus'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/changeStatus</span>
+                        </div>
+                        <div class="row">
+                            <label for="changeAgentNum">坐席工号：</label>
+                            <input id="changeAgentNum" type="text" class="changeAgentNum" value=''>
+                        </div>
+                        <div class="row">
+                                <label for="toStatus">坐席状态码：  (-2未知，-1离线，0空闲，1振铃，2通话，3保持，
+                                4后处理，5被占用，6忙碌，7离开，8预览外呼中，9监控，10呼出中，11静音，999恢复原状态)</label>
+                                <input id="toStatus" type="text" class="toStatus" value=''>
+                            </div>
+                        <div class="row">
+                            <div style='margin-top: 50px;' id="changeStatus" class="btn">状态切换</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeChangeStatus">返回结果：</label>
+                        <code class='code' id='codeChangeStatus'></code>
+                    </div>
+            </div>
+            <!-- 主动外呼 -->
+            <div class="box" id='Callout'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/manualCallout</span>
+                        </div>
+                        <div class="row">
+                            <label for="callAgentNum">坐席工号：</label>
+                            <input id="callAgentNum" type="text" class="agentNum" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="customerNum">客户号码：</label>
+                            <input id="customerNum" type="text" class="customerNum" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="customerDisplayNum">显示号码：</label>
+                            <input id="customerDisplayNum" type="text" class="customerDisplayNum">
+                        </div>
+            
+                        <div class="row">
+                            <div id="manualCallout" class="btn">主动外呼</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeManualCallout">返回结果：</label>
+                        <code class='code' id='codeManualCallout'></code>
+                    </div>
+            </div>
+            <!-- 挂断电话 HandUp-->
+            <div class="box" id='HandUp'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/hangUp</span>
+                        </div>
+                        <div class="row">
+                            <label for="agentID">坐席工号：</label>
+                            <input id="agentID" type="text" class="agentID" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="relationUuid">关联的relationUuid：</label>
+                            <input id="relationUuid" type="text" class="relationUuid" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="agentUuid">振铃事件中的agentUuid：</label>
+                            <input id="agentUuid" type="text" class="agentUuid">
+                        </div>
+            
+                        <div class="row">
+                            <div id="HandUpBtn" class="btn">挂断电话</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeHandUp">返回结果：</label>
+                        <code class='code' id='codeHandUp'></code>
+                    </div>
+            </div>
+            <!--评分  Evaluate-->
+            <div class="box" id='Evaluate'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/evaluate</span>
+                        </div>
+                        <div class="row">
+                            <label for="evaluateAgentID">坐席工号：</label>
+                            <input id="evaluateAgentID" type="text" class="evaluateAgentID" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="callUuid">系统生成的UuId：</label>
+                            <input id="callUuid" type="text" class="callUuid" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="language">语言：(填zh或者cn)</label>
+                            <input id="language" type="text" class="language">
+                        </div>
+            
+                        <div class="row">
+                            <div id="EvaluateBtn" class="btn">评分</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeEvaluate">返回结果：</label>
+                        <code class='code' id='codeEvaluate'></code>
+                    </div>
+            </div>
+            <!-- 静音 MuteVoice-->
+            <div class="box" id='MuteVoice'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/muteVoice</span>
+                        </div>
+                        <div class="row">
+                            <label for="muteAgentNum">坐席工号：</label>
+                            <input id="muteAgentNum" type="text" class="muteAgentNum" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="muteAgentUuid">振铃事件中的agentUuid：</label>
+                            <input id="muteAgentUuid" type="text" class="muteAgentUuid" value=''>
+                        </div>
+                        <div class="row">
+                            <div id="MuteVoiceBtn" class="btn">静音</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeMuteVoice">返回结果：</label>
+                        <code class='code' id='codeMuteVoice'></code>
+                    </div>
+            </div>
+            <!-- 取消静音 UnMuteVoice-->
+            <div class="box" id='UnMuteVoice'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/unMuteVoice</span>
+                        </div>
+                        <div class="row">
+                            <label for="unMuteAgentNum">坐席工号：</label>
+                            <input id="unMuteAgentNum" type="text" class="unMuteAgentNum" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="unMuteAgentUuid">振铃事件中的agentUuid：</label>
+                            <input id="unMuteAgentUuid" type="text" class="unMuteAgentUuid" value=''>
+                        </div>
+                        <div class="row">
+                            <div id="unMuteAgentUuidBtn" class="btn">取消静音</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeunMuteAgentUuid">返回结果：</label>
+                        <code class='code' id='codeunMuteAgentUuid'></code>
+                    </div>
+            </div>
+            <!-- 保持  HoldVoice-->
+            <div class="box" id='HoldVoice'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/holdVoice</span>
+                        </div>
+                        <div class="row">
+                            <label for="HoldVoiceAgentNum">坐席工号：</label>
+                            <input id="HoldVoiceAgentNum" type="text" class="HoldVoiceAgentNum" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="HoldVoiceAgentUuid">振铃事件中的agentUuid：</label>
+                            <input id="HoldVoiceAgentUuid" type="text" class="HoldVoiceAgentUuid" value=''>
+                        </div>
+                        <div class="row">
+                            <div id="HoldVoiceBtn" class="btn">保持</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeunHoldVoice">返回结果：</label>
+                        <code class='code' id='codeunHoldVoice'></code>
+                    </div>
+            </div>
+            <!-- 取消保持 UnHoldVoice-->
+            <div class="box" id='UnHoldVoice'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/unholdVoice</span>
+                        </div>
+                        <div class="row">
+                            <label for="UnHoldVoiceAgentNum">坐席工号：</label>
+                            <input id="UnHoldVoiceAgentNum" type="text" class="UnHoldVoiceAgentNum" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="UnHoldVoiceAgentUuid">振铃事件中的agentUuid：</label>
+                            <input id="UnHoldVoiceAgentUuid" type="text" class="UnHoldVoiceAgentUuid" value=''>
+                        </div>
+                        <div class="row">
+                            <div id="UnHoldVoiceBtn" class="btn">取消保持</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeunUnHoldVoice">返回结果：</label>
+                        <code class='code' id='codeunUnHoldVoice'></code>
+                    </div>
+            </div>
+            <!--监控相关处理（监听、密语、强插、强拆)  MonitorHandle-->
+            <div class="box" id='MonitorHandle'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/monitorHandle</span>
+                        </div>
+                        <div class="row">
+                            <label for="MonitorHandleAgentID">坐席工号：</label>
+                            <input id="MonitorHandleAgentID" type="text" class="MonitorHandleAgentID" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="cmdType">处理的类型：("eavesdrop"=监听、"whisper"=密语、"bargein"=强插、"force_hangup"=强拆)</label>
+                            <input id="cmdType" type="text" class="cmdType" value=''>
+                        </div>
+                        <div class="row">
+                                <label for="targetAgentNum">需被监听的座席工号：</label>
+                                <input id="targetAgentNum" type="text" class="targetAgentNum" value=''>
+                            </div>
+                        <div class="row">
+                            <div id="MonitorHandleBtn" class="btn">监听处理</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeMonitorHandle">返回结果：</label>
+                        <code class='code' id='codeMonitorHandle'></code>
+                    </div>
+            </div>
+            <!--三方  ThreeWay-->
+            <div class="box" id='ThreeWay'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/threeWayHandle</span>
+                        </div>
+                        <div class="row">
+                            <label for="ThreeWayAgentID">坐席工号：</label>
+                            <input id="ThreeWayAgentID" type="text" class="ThreeWayAgentID" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="agentCallUuid">record_start事件中的agentUuid：</label>
+                            <input id="agentCallUuid" type="text" class="agentCallUuid" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="trdAgentNum">第三方的座席工号：</label>
+                            <input id="trdAgentNum" type="text" class="trdAgentNum" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="trdIsOutbound">第三方是否是外线：</label>
+                            <input id="trdIsOutbound" type="text" class="trdIsOutbound" value=''>
+                        </div>
+                        <div class="row">
+                            <div id="ThreeWayBtn" class="btn">三方</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeThreeWay">返回结果：</label>
+                        <code class='code' id='codeThreeWay'></code>
+                    </div>
+            </div>
+            <!--取消三方  UnThreeWay-->
+            <div class="box" id='UnThreeWay'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/threeWayCancel</span>
+                        </div>
+                        <div class="row">
+                            <label for="unThreeWayAgentID">坐席工号：</label>
+                            <input id="unThreeWayAgentID" type="text" class="unThreeWayAgentID" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="unThreeWayAgentCallUuid">record_start事件中的agentUuid：</label>
+                            <input id="unThreeWayAgentCallUuid" type="text" class="unThreeWayAgentCallUuid" value=''>
+                        </div>
+                        <div class="row">
+                            <div id="UnThreeWayBtn" class="btn">取消三方</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeUnThreeWay">返回结果：</label>
+                        <code class='code' id='codeUnThreeWay'></code>
+                    </div>
+            </div>
+            <!--6.15.	获取坐席的监控权限  GetCtiAgentRole-->
+            <div class="box" id='GetCtiAgentRole'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/getCtiAgentRole</span>
+                        </div>
+                        <div class="row">
+                            <label for="ctiAgentRoleAgentNum">坐席工号：</label>
+                            <input id="ctiAgentRoleAgentNum" type="text" class="ctiAgentRoleAgentID" value=''>
+                        </div>
+                        <div class="row">
+                            <div id="GetCtiAgentRoleBtn" class="btn">获取坐席的监控权限</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeGetCtiAgentRole">返回结果：</label>
+                        <code class='code' id='codeGetCtiAgentRole'></code>
+                    </div>
+            </div>
+            <!--6.16.	获取坐席组列表  GetAgentGroupList-->
+            <div class="box" id='GetAgentGroupList'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/getAgentGroupList</span>
+                            <span class="getAgentGroupList">正在加载...</span>
+                        </div>
+                        <div class="row">
+                            <label for="getAgentGroupListAgentNum">坐席工号：</label>
+                            <input id="getAgentGroupListAgentNum" type="text" class="getAgentGroupListAgentNum" value=''>
+                        </div>
+                        <div class="row">
+                            <div id="GetAgentGroupListBtn" class="btn">获取坐席组列表</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeGetAgentGroupList">返回结果：</label>
+                        <code class='code' id='codeGetAgentGroupList'></code>
+                    </div>
+            </div>
+            <!--6.17.	根据队列号查询队列成员  GetAgentOfQueue-->
+            <div class="box" id='GetAgentOfQueue'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/getAgentOfQueue</span>
+                            <span class="getAgentOfQueue">正在加载...</span>
+                        </div>
+                        <div class="row">
+                            <label for="getAgentOfQueueAgentNum">坐席工号：</label>
+                            <input id="getAgentOfQueueAgentNum" type="text" class="GetAgentOfQueueAgentID" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="queueNum">队列号：</label>
+                            <input id="queueNum" type="text" class="queueNum" value=''>
+                        </div>
+                        <div class="row">
+                            <div id="GetAgentOfQueueBtn" class="btn">根据队列号查询队列成员</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeGetAgentOfQueue">返回结果：</label>
+                        <code class='code' id='codeGetAgentOfQueue'></code>
+                    </div>
+            </div>
+            <!--6.18.	获取某个坐席组的成员  GetAgentsOfAgentGroup-->
+            <div class="box" id='GetAgentsOfAgentGroup'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/getAgentsOfAgentGroup</span>
+                            <span class="getAgents">正在加载...</span>
+                        </div>
+                        <div class="row">
+                            <label for="AgentGroupAgentNum">坐席工号：</label>
+                            <input id="AgentGroupAgentNum" type="text" class="AgentGroupAgentNum" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="agentGroupNum">坐席组：</label>
+                            <input id="agentGroupNum" type="text" class="agentGroupNum" value=''>
+                        </div>
+                        <div class="row">
+                            <div id="GetAgentsOfAgentGroupBtn" class="btn">获取某个坐席组的成员</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeGetAgentsOfAgentGroup">返回结果：</label>
+                        <code class='code' id='codeGetAgentsOfAgentGroup'></code>
+                    </div>
+            </div>
+            <!--6.19.	获取坐席的监控状态  GetAgentMonitorInfo-->
+            <div class="box" id='GetAgentMonitorInfo'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/GetAgentMonitorInfo</span>
+                            <span class="monitorInfo">正在加载...</span>
+
+                        </div>
+                        <div class="row">
+                            <label for="MonitorInfoAgentNum">坐席工号：</label>
+                            <input id="MonitorInfoAgentNum" type="text" class="MonitorInfoAgentNum" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="agentsStr">需要获取状态的座席工号列表，工号之间用逗号隔开：</label>
+                            <input id="agentsStr" type="text" class="agentsStr" value=''>
+                        </div>
+                        <div class="row">
+                            <div id="GetAgentMonitorInfoBtn" class="btn">获取坐席的监控状态</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeGetAgentMonitorInfo">返回结果：</label>
+                        <code class='code' id='codeGetAgentMonitorInfo'></code>
+                    </div>
+            </div>
+            <!--获取队列统计信息 GetQueueStatis-->
+            <div class="box" id='GetQueueStatis'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/getQueueStatis</span>
+                            <span class="getQueueStatis">正在加载...</span>
+                        </div>
+                        <div class="row">
+                            <label for="GetQueueStatisAgentNum">坐席工号：</label>
+                            <input id="GetQueueStatisAgentNum" type="text" class="GetQueueStatisAgentNum" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="queueNumLstStr">需要获取的队列号码，多个队列之间用逗号隔开：</label>
+                            <input id="queueNumLstStr" type="text" class="queueNumLstStr" value=''>
+                        </div>
+                        <div class="row">
+                            <div id="GetQueueStatisBtn" class="btn">获取队列统计信息</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeGetQueueStatis">返回结果：</label>
+                        <code class='code' id='codeGetQueueStatis'></code>
+                    </div>
+            </div>
+            <!--  6.21.	获取在线的坐席 GetCtiOnlineAgent-->
+            <div class="box" id='GetCtiOnlineAgent'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/GetCtiOnlineAgent</span>
+                            <span class="getCtiOnlineAgent">正在加载...</span>
+                        </div>
+                        <div class="row">
+                            <label for="GetCtiOnlineAgentAgentNum">坐席工号：</label>
+                            <input id="GetCtiOnlineAgentAgentNum" type="text" class="GetCtiOnlineAgentAgentNum" value=''>
+                        </div>
+                        <div class="row">
+                            <div style="margin-top: 40px;" id="GetCtiOnlineAgentBtn" class="btn">获取在线的坐席</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeGetCtiOnlineAgent">返回结果：</label>
+                        <code class='code' id='codeGetCtiOnlineAgent'></code>
+                    </div>
+            </div>
+            <!--6.22.	获取IVR Profile列表  GetIvrProfileList-->
+            <div class="box" id='GetIvrProfileList'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/getIvrProfileList</span>
+                            <span class="getIvrProfileList">正在加载...</span>
+                        </div>
+                        <div class="row">
+                            <label for="GetIvrProfileListAgentId">坐席工号：</label>
+                            <input id="GetIvrProfileListAgentId" type="text" class="GetIvrProfileListAgentId" value=''>
+                        </div>
+                        <div class="row">
+                            <div style="margin-top: 40px;" id="GetIvrProfileListBtn" class="btn">获取IVR Profile列表</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeGetIvrProfileList">返回结果：</label>
+                        <code class='code' id='codeGetIvrProfileList'></code>
+                    </div>
+            </div>
+            <!--6.23.	获取IVR列表  GetIvrList-->
+            <div class="box" id='GetIvrList'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/getIvrList</span>
+                            <span class="getIvrList">正在加载...</span>
+                        </div>
+                        <div class="row">
+                            <label for="GetIvrListAgentId">坐席工号：</label>
+                            <input id="GetIvrListAgentId" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <div style="margin-top: 40px;" id="GetIvrListBtn" class="btn">获取IVR列表</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeGetIvrList">返回结果：</label>
+                        <code class='code' id='codeGetIvrList'></code>
+                    </div>
+            </div>
+            <!--6.24.	询问  ConsultHandle-->
+            <div class="box" id='ConsultHandle'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/consultHandle</span>
+                        </div>
+                        <div class="row">
+                            <label for="ConsultAgentID">坐席工号：</label>
+                            <input id="ConsultAgentID" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="consultAgentCallUuid">振铃事件中的agentUuid：</label>
+                            <input id="consultAgentCallUuid" type="text" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="consulteeIsOutbound">被询问者是否是外线：(是：true，否：false)</label>
+                            <input id="consulteeIsOutbound" type="text" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="consulteeAgentNum">被询问座席号：(consulteeIsOutbound为true时，consulteeAgentNum为外线号码)</label>
+                            <input id="consulteeAgentNum" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <div id="ConsultHandleBtn" class="btn">询问</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeConsultHandle">返回结果：</label>
+                        <code class='code' id='codeConsultHandle'></code>
+                    </div>
+            </div>
+            <!-- 6.25.	取消询问 ConsultCancel-->
+            <div class="box" id='ConsultCancel'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/consultCancel</span>
+                        </div>
+                        <div class="row">
+                            <label for="ConsultCancelAgentId">坐席工号：</label>
+                            <input id="ConsultCancelAgentId" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="ConsultAgentCallUuid">振铃事件中的agentUuid：</label>
+                            <input id="ConsultAgentCallUuid" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <div id="ConsultCancelBtn" class="btn">取消询问</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeConsultCancel">返回结果：</label>
+                        <code class='code' id='codeConsultCancel'></code>
+                    </div>
+            </div>
+            <!--询问转  ConsultTransfer-->
+            <div class="box" id='ConsultTransfer'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/ConsultTransfer</span>
+                        </div>
+                        <div class="row">
+                            <label for="ConsultTransferAgentId">坐席工号：</label>
+                            <input id="ConsultTransferAgentId" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="TransferAgentCallUuid">振铃事件中的agentUuid：</label>
+                            <input id="TransferAgentCallUuid" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <div id="ConsultTransferBtn" class="btn">询问转</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeConsultTransfer">返回结果：</label>
+                        <code class='code' id='codeConsultTransfer'></code>
+                    </div>
+            </div>
+            <!-- 6.27.	盲转 BlindTransfer-->
+            <div class="box" id='BlindTransfer'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/blindTransfer</span>
+                        </div>
+                        <div class="row">
+                            <label for="blindAgentId">坐席工号：</label>
+                            <input id="blindAgentId" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="customerCallUuid">Answer事件中的relationUuid：</label>
+                            <input id="customerCallUuid" type="text" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="transfereeIsOutbound">被盲转者是否是外线:(是：true，否：false)</label>
+                            <input id="transfereeIsOutbound" type="text" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="transfereeAgentNum">被盲转座席号：(transfereeIsOutbound为true时，transfereeAgentNum为外线号码)</label>
+                            <input id="transfereeAgentNum" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <div id="BlindTransferBtn" class="btn">盲转</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeBlindTransfer">返回结果：</label>
+                        <code class='code' id='codeBlindTransfer'></code>
+                    </div>
+            </div>
+            <!--6.28.	获取坐席状态  CtiAgentStatus-->
+            <div class="box" id='CtiAgentStatus'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/ctiAgentStatusTotalList</span>
+                        </div>
+                        <div class="row">
+                            <label for="ctiAgentObj">Agentnum:</label>
+                            <input id="ctiAgentObj" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="ctiAgentAgent">坐席号：</label>
+                            <input id="ctiAgentAgent" type="text" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="ctiAgentGroupby">groupby:(按日期排序， 输入格式为：%Y-%m-%d,)</label>
+                            <input id="ctiAgentGroupby" type="text" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="ctiAgentPage">当前页数：(默认1)</label>
+                            <input id="ctiAgentPage" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="ctiAgentRows">每页条数：</label>
+                            <input id="ctiAgentRows" type="text" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="ctiAgentStart">起始时间:</label>
+                            <input id="ctiAgentStart" type="datetime-local" value=''>
+                        </div>
+                        <div class="row">
+                            <label for="ctiAgentEnd">结束时间：</label>
+                            <input id="ctiAgentEnd" type="datetime-local"  value=''>
+                        </div>
+                        <div class="row">
+                            <div id="CtiAgentStatusBtn" class="btn">获取坐席状态</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeCtiAgentStatus">返回结果：</label>
+                        <code class='code' id='codeCtiAgentStatus'></code>
+                    </div>
+            </div>
+            <!-- 6.29.	坐席互拨 InternalCal-->
+            <div class="box" id='InternalCal'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/internalCall</span>
+                        </div>
+                        <div class="row">
+                            <label for="InternalCalAgentId">坐席工号：</label>
+                            <input id="InternalCalAgentId" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="calledAgentNum">被呼叫的座席号：</label>
+                            <input id="calledAgentNum" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <div id="InternalCalBtn" class="btn">坐席互拨</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeInternalCal">返回结果：</label>
+                        <code class='code' id='codeInternalCal'></code>
+                    </div>
+            </div>
+            <!--6.30.	重置密码  ResetPassword-->
+            <div class="box" id='ResetPassword'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/resetPasswordToDefault</span>
+                        </div>
+                        <div class="row">
+                            <label for="ResetPasswordopenId">用户openId：</label>
+                            <input id="ResetPasswordopenId" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="calledOldPwd">旧密码：</label>
+                            <input id="calledOldPwd" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <div id="ResetPasswordBtn" class="btn">重置密码</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeResetPassword">返回结果：</label>
+                        <code class='code' id='codeResetPassword'></code>
+                    </div>
+            </div>
+            <!--6.31.	队列转交 QueueTransfer  -->
+            <div class="box" id='QueueTransfer'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/queueTransfer</span>
+                        </div>
+                        <div class="row">
+                            <label for="QueueTransferAgentID">座席工号：</label>
+                            <input id="QueueTransferAgentID" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="queueCustomerCallUuid">当有新电话产生时系统生成的UuId：</label>
+                            <input id="queueCustomerCallUuid" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="queueQueueNum">队列号码：</label>
+                            <input id="queueQueueNum" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <div id="QueueTransferBtn" class="btn">重置密码</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeQueueTransfer">返回结果：</label>
+                        <code class='code' id='codeQueueTransfer'></code>
+                    </div>
+            </div>
+            <!--坐席转交  AgentTransfer-->
+            <div class="box" id='AgentTransfer'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/agentTransfer</span>
+                        </div>
+                        <div class="row">
+                            <label for="AgentTransferAgentID">座席工号：</label>
+                            <input id="AgentTransferAgentID" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="agentCustomerCallUuid">当有新电话产生时系统生成的UuId：</label>
+                            <input id="agentCustomerCallUuid" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="agentTransfereeIsOutbound">被盲转者是否是外线：(是：true，否：false)</label>
+                            <input id="agentTransfereeIsOutbound" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="agentTransfereeAgentNum">被盲转座席号：(transfereeIsOutbound为true时，transfereeAgentNum为外线号码)</label>
+                            <input id="agentTransfereeAgentNum" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <div id="AgentTransferBtn" class="btn">坐席互转</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeAgentTransfer">返回结果：</label>
+                        <code class='code' id='codeAgentTransfer'></code>
+                    </div>
+            </div>
+
+            <!--根据队列获取客户排队情况  GetCustomerQueue-->
+            <div class="box" id='GetCustomerQueue'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/cti/getCustomerQueue</span>
+                        </div>
+                        <div class="row">
+                            <label for="GetCustomerQueueAgentNum">座席工号：</label>
+                            <input id="GetCustomerQueueAgentNum" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <label for="getCustomerQueueNumLstStr">表示需要获取的队列号码，多个队列之间用逗号隔开：</label>
+                            <input id="getCustomerQueueNumLstStr" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <div id="GetCustomerQueueBtn" class="btn">根据队列获取客户排队情况</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeGetCustomerQueue">返回结果：</label>
+                        <code class='code' id='codeGetCustomerQueue'></code>
+                    </div>
+            </div>
+            <!--获取呼叫详情  GetDetailCallInfo-->
+            <div class="box" id='GetDetailCallInfo'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>API:</label>
+                            <span>/api/cti/getDetailCallInfoByCallUuid</span>
+                        </div>
+                        <div class="row">
+                            <label for="GetDetailCallInfoAgentUuid">当前通话者的callUuid：</label>
+                            <input id="GetDetailCallInfoAgentUuid" type="text"  value=''>
+                        </div>
+                        <div class="row">
+                            <div style='margin-top:40px;' id="GetDetailCallInfoBtn" class="btn">获取呼叫详情</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label for="codeGetDetailCallInfo">返回结果：</label>
+                        <code class='code' id='codeGetDetailCallInfo'></code>
+                    </div>
+            </div>
+            <!-- 事件 CtiEvent-->
+            <div class="box" id='CtiEvent'>
+                    <div class="lp">
+                        <div class="row mb20">
+                            <label>CTIEVENT监听</label>
+                        </div>
+                        <div class="row">
+                            <div style='margin-top:40px;' id="clearCtiEventBtn" class="btn">清空监听结果内容</div>
+                        </div>
+                    </div>
+                    <div class="rp">
+                        <label">监听结果：</label>
+                        <code class='ctiCode' id='codeCtiEvent'></code>
+                    </div>
+            </div>
+       
+        </div>
+    </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="./js/jquery-3.3.1.min.js"></script>
+    <script src="./js/md5.min.js"></script>
+    <script src="./js/moment.min.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>

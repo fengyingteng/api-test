@@ -1,0 +1,252 @@
+body{
+    margin: 0;
+    padding: 10px 0;
+    overflow: hidden;
+    font-size:14px !important;
+}
+.content {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    border: 2px solid #eee;
+    box-shadow: #eee 0px 0px 16px;  
+}
+
+.wrap {
+    display: flex;
+    width: 100%;
+}
+.title {
+    margin: 10px auto;
+    padding: 10px;
+    box-shadow: #eee 0px 0px 16px; 
+}
+
+.left_wrap {
+    width: 20%;
+    height: calc(100vh);
+    margin-right: 10px;
+    overflow-y: auto;
+    padding-bottom: 20px;
+    box-shadow: #eee 0px 0px 16px;  
+}
+
+.left_wrap h3 {
+   margin: 0;
+   padding-top:20px;
+   padding-bottom: 10px;
+   padding-left: 10px;
+   font-size: 16px;
+   border-bottom: 1px solid #eee;
+  
+}
+.left_wrap h4 {
+    margin: 0;
+    padding-top:10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    font-size: 14px; 
+    border-bottom: 1px solid #eee;
+}
+.name {
+    display: block;
+    text-decoration: none;
+    text-indent: 1em;
+    line-height: 1.5em;
+    color: #000;
+    border-bottom: 1px solid #eee;
+    padding:  4px 10px;
+    font-size:14px;
+}
+.name:last-child {
+    border-bottom: none;
+    padding: 10px;
+}
+
+.right_wrap {
+    width: 80%;
+    height: calc(100vh);
+    border-left: 1px solid #eee;
+    /* margin-right: -16px; */
+    overflow-y: auto;
+    box-shadow: #eee 0px 0px 16px;
+}
+
+.getCap {
+    display: inline-block;
+    padding: 4px 3px;
+    cursor: pointer;
+    border-radius: 2px;
+    background: #ed365a;
+    color: #fff;
+    position: absolute;
+    top: 6px;
+    right: 250px;
+
+}
+.host {
+    border: 2px solid #eee;
+    padding: 15px;
+    box-shadow: #eee 0px 0px 16px;  
+}
+.host_info {
+    padding-bottom: 15px;
+}
+.host input {
+    width: 100px;
+}
+
+.status_info{
+    display: flex;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+.status_info .item {
+    flex: 1;
+}
+
+
+.box {
+    display: flex;
+    margin: 10px auto;
+    width:100%;
+    /* min-height: 300px; */
+    padding: 15px;
+    box-sizing: border-box;
+    box-shadow: #eee 0px 0px 16px;  
+}
+.lp,.rp{
+    width:50%;
+}
+label{
+    display: inline-block;
+    min-width: 120px;
+}
+input{
+    display: inline-block;
+    width: 400px;
+    border: none;
+    padding: 3px 5px;
+    margin-top: 4px;
+    border-bottom: 1px solid #eee;
+}
+.warn {
+    border: 1px solid red;
+}
+
+.tips {
+    display: inline-block;
+}
+
+
+input.protocol{
+    width: 320px;
+}
+.divider{
+    display: inline-block;
+    font-size: 12px;
+    padding: 0 3px;
+}
+.row{
+    padding: 5px 10px;
+    position: relative;
+}
+.mb20{
+    margin-bottom: 10px;
+}
+.code{
+    overflow: auto;
+    margin: 10px 0 0;
+    border:1px solid #9c6969;
+    padding: 2%;
+    width: 96%;
+    min-height: 100px;
+    border-radius: 5px;
+    display: inline-block;
+    max-height: 250px;
+}
+.ctiCode {
+    overflow-y: auto;
+    margin: 10px 0 0;
+    border:1px solid #9c6969;
+    padding: 2%;
+    width: 96%;
+    min-height: 100px;
+    border-radius: 5px;
+    display: inline-block;
+    max-height: 200px; 
+}
+.btn{
+    margin: 10px 0 0 120px;
+    padding: 3px 0;
+    display: inline-block;
+    width:100px;
+    background: #ed365a;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+.btn:hover{
+    background: #f30a38;
+}
+#getRoomsBtn,
+#getVoiceRoomsBtn,
+#getVoiceRoomsHistoryBtn,
+#getUserMsgByRidBtn,
+#GetCtiAgentRoleBtn,
+#GetAgentGroupListBtn,
+#GetAgentMonitorInfoBtn,
+#GetQueueStatisBtn,
+#GetCtiOnlineAgentBtn,
+#clearCtiEventBtn,
+#getAgentBtn {
+    width:170px;  
+}
+#GetAgentOfQueueBtn,
+#GetIvrProfileListBtn,
+#GetCustomerQueueBtn,
+#GetAgentsOfAgentGroupBtn {
+    width: 190px;
+}
+
+#imgCode {
+    width: 75px;
+    height: 30px;
+    position: relative;
+    left: 20px;
+}
+
+.captcha_wrap {
+   margin-bottom: 10px
+}
+.captcha {
+    width: 240px;
+}
+
+.getAgentOfQueue,
+.getAgentGroupList,
+.monitorInfo,
+.getQueueStatis,
+.getCtiOnlineAgent,
+.getIvrProfileList,
+.getIvrList,
+.getAgents {
+    margin-left: 40px;
+    padding: 3px 5px;
+    border: 1px solid red;
+    background: #f30a38;
+    color: #fff;
+}
+
+
+ul {
+    list-style-type: none; 
+}
+ul li {
+    padding: 4px;
+}
+
+
+
+

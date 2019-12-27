@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>API DEMO PAGE</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        h3 {
+            margin: 0 auto 20px;
+            width: 90%;
+            /* border-bottom: 1px solid rgba(0, 0, 0, 0.05) */
+        }
+
+        .header{
+            margin: 0 auto 20px;
+            width: 90%;
+        }
+
+        .box {
+            display: flex;
+            margin: 0 auto 20px;
+            width: 90%;
+            min-height: 300px;
+            box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05)
+        }
+        .lp,.rp{
+            width:50%;
+        }
+        label{
+            display: inline-block;
+            min-width: 120px;
+        }
+        input{
+            display: inline-block;
+            width: 400px;
+            border: none;
+            padding: 3px 5px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.88)
+        }
+
+        input.host{
+            width:100px;
+        }
+        input.protocol,
+        input.port{
+            width: 30px;
+        }
+        .divider{
+            display: inline-block;
+            font-size: 12px;
+            padding: 0 3px;
+        }
+        .row{
+            padding: 5px 10px;
+        }
+        .mb20{
+            margin-bottom: 20px;
+        }
+        .code{
+            overflow: auto;
+            margin: 10px 0 0;
+            border:1px solid #9c6969;
+            padding: 2%;
+            width: 96%;
+            min-height: 100px;
+            border-radius: 5px;
+            display: inline-block;
+            max-height: 300px;
+        }
+        .btn{
+            margin: 10px 0 0 120px;
+            padding: 3px 0;
+            display: inline-block;
+            width:100px;
+            background: #ed365a;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+        }
+        .btn:hover{
+            background: #f30a38;
+        }
+    </style>
+    <script src="./jquery-3.3.1.min.js"></script>
+    <script src="./md5.min.js"></script>
+</head>
+
+<body>
+
+    <div class="header">
+        <div>
+            <label>访问的主机地址:</label>
+            <input placeholder="http" type="text" class="protocol">
+            <span class="divider">:&nbsp;//</span>
+            <input placeholder="127.0.0.1" type="text" class="host">
+            <span class="divider">:</span>
+            <input placeholder="4018" type="text" class="port">
+        </div>
+
+    </div>
+    <h3>登录接口</h3>
+    <div class="box">
+        <div class="lp">
+            <div class="row mb20">
+                <label for="account">API:</label>
+                <span>/api/sysUserSignIn</span>
+            </div>
+            <div class="row">
+                <label for="account">用户名：</label>
+                <input id="account" type="text" class="account" value='1133'>
+            </div>
+            <div class="row">
+                <label for="password">密码：</label>
+                <input id="password" type="password" class="password" value='123456'>
+            </div>
+            <div class="row">
+                <label for="captcha">验证码：</label>
+                <input id="captcha" type="text" class="captcha">
+                <img id='imgCode' alt='' />
+            </div>
+            <div class="row">
+                <label for="captcha-token">验证码token：</label>
+                <input id="captchaToken" type="text" class="captcha-token">
+            </div>
+            <div class="row">
+                <div id="login" class="btn">登录</div>
+            </div>
+        </div>
+        <div class="rp">
+            <label for="codeLogin">返回结果：</label>
+            <code class='code' id='codeLogin'></code>
+        </div>
+    </div>
+    <div class="box">
+        <div class="lp">
+            <div class="row mb20">
+                <label for="account">API:</label>
+                <span>/api/ctiSignIn</span>
+            </div>
+            <div class="row">
+                <label for="agentNum">坐席工号：</label>
+                <input id="agentNum" type="text" class="agentNum" value='1133'>
+            </div>
+            <div class="row">
+                <label for="exten">分机号：</label>
+                <input id="exten" type="text" class="exten" value='1008'>
+            </div>
+            <div class="row">
+                <label for="initStatus">状态码：</label>
+                <input id="initStatus" type="text" class="initStatus" value="0">
+            </div>
+
+            <div class="row">
+                <div id="ctiSignIn" class="btn">上线</div>
+            </div>
+        </div>
+        <div class="rp">
+            <label for="codeCtiSignIn">返回结果：</label>
+            <code class='code' id='codeCtiSignIn'></code>
+        </div>
+    </div>
+    <div class="box">
+            <div class="lp">
+                <div class="row mb20">
+                    <label for="account">API:</label>
+                    <span>/api/manualCallout</span>
+                </div>
+                <div class="row">
+                    <label for="agentNum">坐席工号：</label>
+                    <input id="agentNum" type="text" class="agentNum" value='1133'>
+                </div>
+                <div class="row">
+                    <label for="customerNum">客户号码：</label>
+                    <input id="customerNum" type="text" class="customerNum" value='0564'>
+                </div>
+                <div class="row">
+                    <label for="customerDisplayNum">显示号码：</label>
+                    <input id="customerDisplayNum" type="text" class="customerDisplayNum">
+                </div>
+    
+                <div class="row">
+                    <div id="manualCallout" class="btn">外呼</div>
+                </div>
+            </div>
+            <div class="rp">
+                <label for="codeManualCallout">返回结果：</label>
+                <code class='code' id='codeManualCallout'></code>
+            </div>
+        </div>
+    <script src="./main.js"></script>
+</body>
+
+</html>
